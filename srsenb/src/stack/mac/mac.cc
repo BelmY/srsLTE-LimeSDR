@@ -270,7 +270,7 @@ int mac::ue_set_crnti(uint16_t temp_crnti, uint16_t crnti, sched_interface::ue_c
   } else {
     // C-RNTI corresponds to older user. Handover scenario.
     phy_h->rem_rnti(crnti);
-    phy_h->add_rnti(crnti, cfg->supported_cc_list[0].enb_cc_idx, false);
+    phy_h->add_rnti(crnti, cfg->supported_cc_list[0].enb_cc_idx);
     scheduler.dl_mac_buffer_state(crnti, (uint32_t)srslte::dl_sch_lcid::CON_RES_ID);
   }
   return ret;
