@@ -59,6 +59,11 @@ if(RF_FOUND)
     list(APPEND SOURCES_RF rf_soapy_imp.c)
   endif (SOAPYSDR_FOUND AND ENABLE_SOAPYSDR)
 
+  if (LIMESDR_FOUND AND ENABLE_LIMESDR)
+    add_definitions(-DENABLE_LIMESDR)
+    list(APPEND SOURCES_RF rf_limesdr_impl.c)
+  endif (LIMESDR_FOUND AND ENABLE_LIMESDR)
+
   if (ZEROMQ_FOUND)
     add_definitions(-DENABLE_ZEROMQ)
     list(APPEND SOURCES_RF rf_zmq_imp.c rf_zmq_imp_tx.c rf_zmq_imp_rx.c)
@@ -86,6 +91,10 @@ if(RF_FOUND)
     target_link_libraries(rf_zmq_test srslte_rf)
     #add_test(rf_zmq_test rf_zmq_test)
   endif (ZEROMQ_FOUND)
+
+  if (LIMESDR_FOUND AND ENABLE_LIMESDR)
+    target_link_libraries(srslte_rf ${LIMESDR_LIBRARIES})
+  endif (LIMESDR_FOUND AND ENABLE_LIMESDR)
 
   INSTALL(TARGETS srslte_rf DESTINATION ${LIBRARY_DIR})
 endif(RF_FOUND)
