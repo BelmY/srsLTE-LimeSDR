@@ -32,8 +32,7 @@ if (RPATH)
   SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 endif (RPATH)
 
-add_library(enb_cfg_parser parser.cc enb_cfg_parser.cc)
-target_link_libraries(enb_cfg_parser ${LIBCONFIGPP_LIBRARIES})
+add_library(enb_cfg_parser STATIC parser.cc enb_cfg_parser.cc)
 
 add_executable(srsenb main.cc enb.cc metrics_stdout.cc metrics_csv.cc)
 target_link_libraries(srsenb  srsenb_phy
